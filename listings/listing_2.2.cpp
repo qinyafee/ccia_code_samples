@@ -34,10 +34,10 @@ void f()
     }
     catch(...)
     {
-        t.join();
+        t.join();//当函数执行过程中抛出异常，程序会执行到①处
         throw;
     }
-    t.join();
+    t.join();//当函数正常退出时，会执行到②处
 }
 
 int main()

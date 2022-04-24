@@ -9,5 +9,5 @@ void hello()
 int main()
 {
     std::thread t(hello);
-    t.join();
+    t.join(); // 等待线程t结束
 }

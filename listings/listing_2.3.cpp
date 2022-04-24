@@ -1,5 +1,6 @@
 #include <thread>
 
+//使用RAII等待线程完成
 class thread_guard
 {
     std::thread& t;
@@ -9,6 +10,8 @@ public:
     {}
     ~thread_guard()
     {
+        //只能对一个线程使用一次join();一旦已经使用过join()，
+        // std::thread 对象就不能再次加入了，当对其使用joinable()时，将返回否（false）。
         if(t.joinable())
         {
             t.join();
@@ -50,7 +53,7 @@ void f()
     thread_guard g(t);
         
     do_something_in_current_thread();
-}
+} //当线程执行到④处时，局部对象就要被逆序销毁了。
 
 int main()
 {

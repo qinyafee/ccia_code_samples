@@ -7,7 +7,7 @@ std::mutex some_mutex;
 
 void add_to_list(int new_value)
 {
-    std::lock_guard<std::mutex> guard(some_mutex);
+    std::lock_guard<std::mutex> guard(some_mutex); //RAII语法的模板类 std::lock_guard 
     some_list.push_back(new_value);
 }
 bool list_contains(int value_to_find)

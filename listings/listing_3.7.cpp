@@ -1,5 +1,6 @@
 #include <mutex>
 
+// 使用层次锁来避免死锁
 class hierarchical_mutex
 {
 public:

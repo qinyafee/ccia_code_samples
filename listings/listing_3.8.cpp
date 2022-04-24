@@ -1,7 +1,7 @@
 #include <mutex>
 #include <stdexcept>
 #include <climits>
-class hierarchical_mutex
+class hierarchical_mutex //虽然hierarchical_mutex不是C++标准的一部分，但实现容易
 {
     std::mutex internal_mutex;
     unsigned long const hierarchy_value;

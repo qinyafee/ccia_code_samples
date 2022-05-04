@@ -1,3 +1,5 @@
+// 使用 std::call_once 作为类成员的延迟初始化(线程安全)
+
 #include <mutex>
 
 struct connection_info
@@ -40,14 +42,16 @@ public:
     X(connection_info const& connection_details_):
         connection_details(connection_details_)
     {}
-    void send_data(data_packet const& data)
+
+    // 第一个调用send_data()①或receive_data()③的线程完成初始化过程。
+    void send_data(data_packet const& data) //1
     {
-        std::call_once(connection_init_flag,&X::open_connection,this);
+        std::call_once(connection_init_flag,&X::open_connection,this); //2
         connection.send_data(data);
     }
-    data_packet receive_data()
+    data_packet receive_data() //3
     {
-        std::call_once(connection_init_flag,&X::open_connection,this);
+        std::call_once(connection_init_flag,&X::open_connection,this); //4
         return connection.receive_data();
     }
 };

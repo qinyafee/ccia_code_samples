@@ -1,5 +1,7 @@
 #include <deque>
 #include <cstddef>
+
+// std::queue 接口
 template <class T, class Container = std::deque<T> >
 class queue {
 public:
